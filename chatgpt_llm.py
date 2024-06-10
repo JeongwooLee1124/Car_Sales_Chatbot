@@ -129,7 +129,7 @@ class GradeDocuments(BaseModel):
 
 
 # LLM with function call
-llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+llm = ChatOpenAI(model="gpt-4o", temperature=0)
 structured_llm_grader = llm.with_structured_output(GradeDocuments)
 
 # Prompt
@@ -202,11 +202,11 @@ branch = RunnableBranch(
 ### Question Re-writer (질문 생성기)
 
 # LLM
-llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+llm = ChatOpenAI(model="gpt-4o", temperature=0)
 
 # Prompt
 system = """You a question re-writer that converts an input question to a better version that is optimized \n 
-    for web search. Most of question is about the car. Look at the input and try to reason about the underlying semantic intent / meaning. You havet to rewrite in Korean"""
+    for web search. Most of question is about the car. Look at the input and try to reason about the underlying semantic intent / meaning. You havet to rewrite in Korean. If the user wants a recommendation, verify that it is the latest 2024 model and not discontinued car before responding."""
 re_write_prompt = ChatPromptTemplate.from_messages(
     [
         ("system", system),
