@@ -259,11 +259,11 @@ def retrieve(state):
     Returns:
         state (dict): New key added to state, documents, that contains retrieved documents
     """
-    print("---RETRIEVE---")
+    #print("---RETRIEVE---")
     question = state["question"]
     chat_history = state["chat_history"]
 
-    print(chat_history)
+    #print(chat_history)
 
     # Retrieval
     result = _inputs.invoke({"question":question, "chat_history":chat_history})
@@ -281,12 +281,12 @@ def generate(state):
     Returns:
         state (dict): New key added to state, generation, that contains LLM generation
     """
-    print("---GENERATE---")
+    #print("---GENERATE---")
     question = state["question"]
     documents = state["documents"]
     chat_history = state["chat_history"]
     agent = state["agent"]
-    print(chat_history)
+    #print(chat_history)
 
     # RAG generation
     generation = branch.invoke({"context": _combine_documents(documents), "question": question, "chat_history": chat_history, "agent": agent})
@@ -304,7 +304,7 @@ def grade_documents(state):
         state (dict): Updates documents key with only filtered relevant documents
     """
 
-    print("---CHECK DOCUMENT RELEVANCE TO QUESTION---")
+    #print("---CHECK DOCUMENT RELEVANCE TO QUESTION---")
     question = state["question"]
     documents = state["documents"]
 
@@ -317,10 +317,10 @@ def grade_documents(state):
         )
         grade = score.binary_score
         if grade == "yes":
-            print("---GRADE: DOCUMENT RELEVANT---")
+            #print("---GRADE: DOCUMENT RELEVANT---")
             filtered_docs.append(d)
         else:
-            print("---GRADE: DOCUMENT NOT RELEVANT---")
+            #print("---GRADE: DOCUMENT NOT RELEVANT---")
             web_search = "Yes"
             continue
     return {"documents": filtered_docs, "question": question, "web_search": web_search}
@@ -337,13 +337,13 @@ def transform_query(state):
         state (dict): Updates question key with a re-phrased question
     """
 
-    print("---TRANSFORM QUERY---")
+    #print("---TRANSFORM QUERY---")
     question = state["question"]
     documents = state["documents"]
 
     # Re-write question
     better_question = question_rewriter.invoke({"question": question})
-    print(f"Better Question: {better_question}")
+    #print(f"Better Question: {better_question}")
     return {"documents": documents, "question": better_question}
 
 
@@ -358,7 +358,7 @@ def web_search(state):
         state (dict): Updates documents key with appended web results
     """
 
-    print("---WEB SEARCH---")
+    #print("---WEB SEARCH---")
     question = state["question"]
     documents = state["documents"]
 
@@ -368,7 +368,7 @@ def web_search(state):
     web_results = Document(page_content=web_results)
     documents.append(web_results)
 
-    print(f"Result: {documents}")
+    #print(f"Result: {documents}")
 
     return {"documents": documents, "question": question}
 
@@ -385,7 +385,7 @@ def decide_to_generate(state):
         str: Binary decision for next node to call
     """
 
-    print("---ASSESS GRADED DOCUMENTS---")
+    #print("---ASSESS GRADED DOCUMENTS---")
     question = state["question"]
     web_search = state["web_search"]
     filtered_documents = state["documents"]
@@ -393,13 +393,13 @@ def decide_to_generate(state):
     if web_search == "Yes":
         # All documents have been filtered check_relevance
         # We will re-generate a new query
-        print(
-            "---DECISION: ALL DOCUMENTS ARE NOT RELEVANT TO QUESTION, TRANSFORM QUERY---"
-        )
+        # print(
+        #    "---DECISION: ALL DOCUMENTS ARE NOT RELEVANT TO QUESTION, TRANSFORM QUERY---"
+        # )
         return "transform_query"
     else:
         # We have relevant documents, so generate answer
-        print("---DECISION: GENERATE---")
+        # print("---DECISION: GENERATE---")
         return "generate"
     
 
@@ -437,4 +437,4 @@ if __name__ == "__main__":
     inputs = {"question": "30대 직장인 남성 출퇴근용 자동차를 추천해주세요.", "chat_history":[]}
 
     ## Final generation
-    print(graph_chain.invoke(inputs))
+    ## print(graph_chain.invoke(inputs))
