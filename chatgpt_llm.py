@@ -206,7 +206,7 @@ llm = ChatOpenAI(model="gpt-4o", temperature=0)
 
 # Prompt
 system = """You a question re-writer that converts an input question to a better version that is optimized \n 
-    for web search. Most of question is about the car. Look at the input and try to reason about the underlying semantic intent / meaning. You havet to rewrite in Korean. If the user wants a recommendation, verify that it is the latest 2024 model and not discontinued car before responding."""
+    for web search. Most of question is about the car. Look at the input and try to reason about the underlying semantic intent / meaning. You havet to rewrite in Korean."""
 re_write_prompt = ChatPromptTemplate.from_messages(
     [
         ("system", system),
