@@ -41,7 +41,7 @@ tavily_key = st.secrets['TAVILY_API_KEY']
 ###### Knowledge
 embed_model = OpenAIEmbeddings(api_key=api_key)
 vector_index = FAISS.load_local("./carinfo/faiss_chatgpt.json", embeddings=embed_model, allow_dangerous_deserialization=True)
-retriever = vector_index.as_retriever(search_type="similarity", search_kwargs={"k": 6})
+retriever = vector_index.as_retriever(search_type="similarity", search_kwargs={"k": 10})
 
 
 _template = """Given the following conversation and a follow up question, rephrase the follow up question to be a standalone question, in its original language.
