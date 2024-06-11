@@ -176,7 +176,7 @@ prompt_i= ChatPromptTemplate.from_messages(
 )
 
 # LLM
-answer_llm = ChatOpenAI(model_name="gpt-4o", temperature=0, streaming=True)
+answer_llm = ChatOpenAI(model_name="gpt-4o", temperature=0.1, streaming=True)
 
 # Post-processing
 def format_docs(docs):
