@@ -196,13 +196,13 @@ def main():
         
         if st.button("정확한 차량의 스펙과 성능 정보를 알려주세요.", key="specs"):
             choice = "정확한 차량의 스펙과 성능 정보"
-            agent = '피카지니'
+            agent = '인포마스터'
         elif st.button("자동차 딜러의 의견과 이야기가 듣고 싶어요.", key="opinions"):
             choice = "딜러의 의견과 이야기"
-            agent = '피카지니'
+            agent = '코넥토'
         elif st.button("저를 위한 자동차 구매 혜택과 특별 프로모션도 궁금해요", key="promotions"):
             choice = "나를 위한 구매 혜택과 특별 프로모션"
-            agent = '피카지니'
+            agent = '게인지니'
         else:
             choice = None
             agent = None
@@ -212,7 +212,7 @@ def main():
             st.session_state.choice = choice
             st.session_state.agent = agent
 
-            follow_up_message = (f"안녕하세요, 저는 {st.session_state.agent} 입니다. 고객님께 최고의 딜을 제공해드리기 위해 여기 있습니다. \n"
+            follow_up_message = (f"안녕하세요, 저는 피카지니 입니다. 고객님께 최고의 딜을 제공해드리기 위해 여기 있습니다. \n"
                                  "고객님의 나이와 차량 구매 목적을 말씀해주시면 더 나은 추천을 드릴 수 있습니다. \n "
                                  "또한, 현대, 기아, 르노 중에서 관심 있는 브랜드가 있으면 알려주세요.")
             st.session_state.messages.append({"role": "assistant", "content": follow_up_message})
