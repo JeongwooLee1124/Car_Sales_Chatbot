@@ -196,13 +196,13 @@ def main():
         
         if st.button("정확한 차량의 스펙과 성능 정보를 알려주세요.", key="specs"):
             choice = "정확한 차량의 스펙과 성능 정보"
-            agent = '인포마스터'
+            agent = '피카지니'
         elif st.button("자동차 딜러의 의견과 이야기가 듣고 싶어요.", key="opinions"):
             choice = "딜러의 의견과 이야기"
-            agent = '코넥토'
+            agent = '피카지니'
         elif st.button("저를 위한 자동차 구매 혜택과 특별 프로모션도 궁금해요", key="promotions"):
             choice = "나를 위한 구매 혜택과 특별 프로모션"
-            agent = '게인지니'
+            agent = '피카지니'
         else:
             choice = None
             agent = None
