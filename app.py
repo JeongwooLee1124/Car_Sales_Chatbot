@@ -172,7 +172,7 @@ def main():
             <div class="assistant-message">
                 <img src='data:image/png;base64,{chatbot_avatar_base64}' class='assistant-avatar'>
                 <div>
-                    <div class="assistant-name">{st.session_state.agent}</div>
+                    <div class="assistant-name">피카지니</div>
                     <div class="chatbox">{message['content']}</div>
                 </div>
             </div>
