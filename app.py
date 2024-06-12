@@ -27,7 +27,7 @@ async def typing_effect(message_placeholder):
         message_placeholder.markdown(
             f"<div class='assistant-message'>"
             f"<img src='data:image/png;base64,{chatbot_avatar_base64}' class='assistant-avatar'>"
-            f"<div><div class='assistant-name'>{st.session_state.agent}</div>"
+            f"<div><div class='assistant-name'>피카지니</div>"
             f"<div class='chatbox typing'>{typing_text}{'.' * st.session_state.typing_index}</div>"
             f"</div></div>",
             unsafe_allow_html=True
