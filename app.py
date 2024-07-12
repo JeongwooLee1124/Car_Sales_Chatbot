@@ -39,6 +39,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain.memory import ConversationBufferMemory, ConversationSummaryMemory
 
 from typing_extensions import TypedDict
+sys.modules['sqlite3'] = __import__('pysqlite3')
 
 ##### API 
 api_key = st.secrets['OPENAI_API_KEY']
