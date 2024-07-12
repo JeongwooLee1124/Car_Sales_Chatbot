@@ -1,5 +1,4 @@
 import os
-import sys
 from operator import itemgetter
 from typing import List, Tuple, Dict
 import streamlit as st
@@ -23,7 +22,6 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI, OpenAI
 # from langchain_community.vectorstores.faiss import FAISS
 from langchain.vectorstores.chroma import Chroma
-sys.modules['sqlite3'] = __import__('pysqlite3')
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 from operator import itemgetter
@@ -35,7 +33,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain.memory import ConversationBufferMemory, ConversationSummaryMemory
 
 from typing_extensions import TypedDict
-sys.modules['sqlite3'] = import('pysqlite3')
+sys.modules['sqlite3'] = __import__('pysqlite3')
 
 ##### API 
 api_key = st.secrets['OPENAI_API_KEY']
