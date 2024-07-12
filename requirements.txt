@@ -2,4 +2,3 @@ langchain
 langgraph
 langchain_openai
 openai
-faiss-gpu
