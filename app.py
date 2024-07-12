@@ -23,7 +23,7 @@ chatbot_initial_avatar_base64 = image_to_base64(chatbot_initial_avatar)
 async def typing_effect(message_placeholder):
     typing_text = "PIKAGENIE is typing"
     while st.session_state.awaiting_response:
-        st.session_state.typing_index = (st.session_state.typing_index + 1) % 4
+        st.session_state.typing_index = (st.session_state.typing_index + 1) % 6
         message_placeholder.markdown(
             f"<div class='assistant-message'>"
             f"<img src='data:image/png;base64,{chatbot_avatar_base64}' class='assistant-avatar'>"
