@@ -459,13 +459,13 @@ chatbot_initial_avatar = Image.open("./images/logo.png")
 chatbot_initial_avatar_base64 = image_to_base64(chatbot_initial_avatar)
 
 async def typing_effect(message_placeholder):
-    typing_text = "에이전트가 답변을 작성 중입니다"
+    typing_text = "PIKAGENIE is preparing a response"
     while st.session_state.awaiting_response:
-        st.session_state.typing_index = (st.session_state.typing_index + 1) % 6
+        st.session_state.typing_index = (st.session_state.typing_index + 1) % 4
         message_placeholder.markdown(
             f"<div class='assistant-message'>"
             f"<img src='data:image/png;base64,{chatbot_avatar_base64}' class='assistant-avatar'>"
-            f"<div><div class='assistant-name'>피카지니</div>"
+            f"<div><div class='assistant-name'>PIKAGENIE</div>"
             f"<div class='chatbox typing'>{typing_text}{'.' * st.session_state.typing_index}</div>"
             f"</div></div>",
             unsafe_allow_html=True
@@ -496,7 +496,7 @@ async def fetch_answer_and_typing(inputs, message_placeholder):
         message_placeholder.markdown(
             f"<div class='assistant-message'>"
             f"<img src='data:image/png;base64,{chatbot_avatar_base64}' class='assistant-avatar'>"
-            f"<div><div class='assistant-name'>피카지니</div>"
+            f"<div><div class='assistant-name'>PIKAGENIE</div>"
             f"<div class='chatbox'>{message_text}</div>"
             f"</div></div>",
             unsafe_allow_html=True
@@ -610,7 +610,7 @@ def main():
             <div class="assistant-message">
                 <img src='data:image/png;base64,{chatbot_avatar_base64}' class='assistant-avatar'>
                 <div>
-                    <div class="assistant-name">피카지니</div>
+                    <div class="assistant-name">PIKAGENIE</div>
                     <div class="chatbox">{message['content']}</div>
                 </div>
             </div>
@@ -620,7 +620,7 @@ def main():
     st.markdown('</div>', unsafe_allow_html=True)
 
     if not st.session_state.initial_choice_made:
-        initial_question = """안녕하세요, 언제나 최상의 차량 정보를 제공하는 에피카입니다. 저희와 함께해 주셔서 감사합니다. 차량에 대해 궁금한 점이나 도움이 필요하시면 언제든지 말씀해 주세요. 오늘은 어떤 정보가 필요하신가요?"""
+        initial_question = """Hello, welcome to EPIKAR, your go-to source for top-notch vehicle information. We're here to assist you with any questions or needs regarding cars. What information are you looking for today? """
         # st.session_state.messages.append({"role": "assistant", "content": initial_question})
         st.markdown(f"""
         <div class="assistant-message initial-question">
@@ -632,13 +632,13 @@ def main():
         </div>
         """, unsafe_allow_html=True)
         
-        if st.button("정확한 차량의 스펙과 성능 정보를 알려주세요.", key="specs"):
+        if st.button("Detailed car specifications or performance information.", key="specs"):
             choice = "정확한 차량의 스펙과 성능 정보"
             agent = '인포마스터'
-        elif st.button("자동차 딜러의 의견과 이야기가 듣고 싶어요.", key="opinions"):
+        elif st.button("Car dealers’ opinions or stories.", key="opinions"):
             choice = "딜러의 의견과 이야기"
             agent = '코넥토'
-        elif st.button("저를 위한 자동차 구매 혜택과 특별 프로모션도 궁금해요", key="promotions"):
+        elif st.button("Car purchase benefits or special promotions tailored for me.", key="promotions"):
             choice = "나를 위한 구매 혜택과 특별 프로모션"
             agent = '게인지니'
         else:
@@ -650,15 +650,15 @@ def main():
             st.session_state.choice = choice
             st.session_state.agent = agent
 
-            follow_up_message = (f"안녕하세요, 저는 피카지니 입니다. 고객님께 최고의 딜을 제공해드리기 위해 여기 있습니다. \n"
-                                 "고객님의 나이와 차량 구매 목적을 말씀해주시면 더 나은 추천을 드릴 수 있습니다. \n "
-                                 "또한, 현대, 기아, 르노 중에서 관심 있는 브랜드가 있으면 알려주세요.")
+            follow_up_message = (f"Hi, I'm PIKAGENIE. I'm here to offer you the best deals.\n"
+                                 "If you could share your age and the purpose of your car purchase, \n "
+                                 "I can recommend the best Renault car for you")
             st.session_state.messages.append({"role": "assistant", "content": follow_up_message})
 
             st.rerun()
 
     if st.session_state.initial_choice_made:
-        prompt = st.chat_input("메세지를 입력해 주세요:")
+        prompt = st.chat_input("Please enter what you would like to ask!")
         if prompt:
             st.session_state.messages.append({"role": "user", "content": prompt})
             st.markdown(f"<div class='chatbox user-message'>{prompt}</div>", unsafe_allow_html=True)
@@ -673,7 +673,7 @@ def main():
             message_placeholder.markdown(
                 f"<div class='assistant-message'>"
                 f"<img src='data:image/png;base64,{chatbot_avatar_base64}' class='assistant-avatar'>"
-                f"<div><div class='assistant-name'>피카지니</div>"
+                f"<div><div class='assistant-name'>PIKGENIE</div>"
                 f"<div class='chatbox'>{st.session_state.final_answer}</div>"
                 f"</div></div>",
                 unsafe_allow_html=True
