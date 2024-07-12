@@ -21,7 +21,7 @@ from langchain_core.runnables import (
 
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI, OpenAI
-from langchain_community.vectorstores.chroma import Chroma
+from langchain_community.vectorstores import FAISS
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 from operator import itemgetter
@@ -43,9 +43,7 @@ tavily_key = st.secrets['TAVILY_API_KEY']
 
 ##### Knowledge Base
 embed_model = OpenAIEmbeddings(api_key=api_key)
-vector_index = Chroma(embedding_function=embed_model,
-                      persist_directory="renault_chroma",
-                      collection_name="rag")
+vector_index = FAISS.load_local("./Renault_Data.json", embeddings=embed_model)
 retriever = vector_index.as_retriever(search_type="similarity", search_kwargs={"k": 10})
 
 
