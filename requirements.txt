@@ -3,4 +3,5 @@ langgraph
 langchain-openai
 langchain-community
 openai
-faiss-gpu
+chromadb
+pysqlite3-binary
