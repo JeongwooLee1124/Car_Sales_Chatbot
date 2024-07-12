@@ -20,7 +20,8 @@ from langchain_core.runnables import (
 
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI, OpenAI
-from langchain_community.vectorstores.faiss import FAISS
+# from langchain_community.vectorstores.faiss import FAISS
+from langchain_community.vectorstores import Chroma
 from langchain_core.messages import HumanMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
@@ -40,7 +41,10 @@ tavily_key = st.secrets['TAVILY_API_KEY']
 
 ##### Knowledge Base
 embed_model = OpenAIEmbeddings(api_key=api_key)
-vector_index = FAISS.load_local("./carinfo/faiss_chatgpt.json", embeddings=embed_model, allow_dangerous_deserialization=True)
+# vector_index = FAISS.load_local("./carinfo/faiss_chatgpt.json", embeddings=embed_model, allow_dangerous_deserialization=True)
+vector_index = Chroma(embedding_function=embed_model,
+                      persist_directory="renault_chroma",
+                      collection_name="rag")
 retriever = vector_index.as_retriever(search_type="similarity", search_kwargs={"k": 10})
 
 
