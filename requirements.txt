@@ -1,4 +1,5 @@
 langchain
 langgraph
-langchain_openai
+langchain-openai
+langchain-community
 openai
