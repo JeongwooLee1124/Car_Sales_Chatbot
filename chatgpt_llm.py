@@ -40,7 +40,7 @@ tavily_key = st.secrets['TAVILY_API_KEY']
 
 ##### Knowledge Base
 embed_model = OpenAIEmbeddings(api_key=api_key)
-vector_index = FAISS.load_local("./Renault_Data.json", embeddings=embed_model)
+vector_index = FAISS.load_local("./Renault_Data.json", embeddings=embed_model, allow_dangerous_deserialization=True)
 retriever = vector_index.as_retriever(search_type="similarity", search_kwargs={"k": 10})
 
 
