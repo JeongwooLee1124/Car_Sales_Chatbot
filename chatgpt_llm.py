@@ -20,7 +20,7 @@ from langchain_core.runnables import (
 
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI, OpenAI
-from langchain_community.vectorstores import FAISS
+from langchain_community.vectorstores.faiss import FAISS
 from langchain_core.messages import HumanMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
@@ -34,11 +34,11 @@ from langchain.memory import ConversationBufferMemory, ConversationSummaryMemory
 
 from typing_extensions import TypedDict
 
-###### API 
+##### API 
 api_key = st.secrets['OPENAI_API_KEY']
 tavily_key = st.secrets['TAVILY_API_KEY']
 
-###### Knowledge
+##### Knowledge Base
 embed_model = OpenAIEmbeddings(api_key=api_key)
 vector_index = FAISS.load_local("./carinfo/faiss_chatgpt.json", embeddings=embed_model, allow_dangerous_deserialization=True)
 retriever = vector_index.as_retriever(search_type="similarity", search_kwargs={"k": 10})
@@ -52,7 +52,7 @@ Standalone question:"""  # noqa: E501
 CONDENSE_QUESTION_PROMPT = PromptTemplate.from_template(_template)
 
 
-########### Template
+##### Agent Template
 # 프롬프트 텍스트 파일 경로
 template_gaingenie = "./templates/gaingenie.txt"
 template_connecto  = "./templates/connecto.txt"
@@ -199,7 +199,7 @@ branch = RunnableBranch(
 # generation = rag_chain.invoke({"context": docs, "question": question})
 # print(generation)
 
-### Question Re-writer (질문 생성기)
+##### Question Re-writer (질문 생성기)
 
 # LLM
 llm = ChatOpenAI(model="gpt-4o", temperature=0)
@@ -220,7 +220,7 @@ re_write_prompt = ChatPromptTemplate.from_messages(
 question_rewriter = re_write_prompt | llm | StrOutputParser()
 # question_rewriter.invoke({"question": question})
 
-### Search (웹 검색)
+##### Web Search (웹 검색)
 
 web_search_tool = TavilySearchResults(k=3)
 
@@ -228,7 +228,7 @@ web_search_tool = TavilySearchResults(k=3)
 # memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 memory = ConversationSummaryMemory(llm=OpenAI(temperature=0), memory_key="chat_history", return_messages=True)
 
-###### Langgraph (그래프 구성)
+##### Langgraph (그래프 구성)
 class GraphState(TypedDict):
     """
     Represents the state of our graph.
@@ -403,7 +403,7 @@ def decide_to_generate(state):
         return "generate"
     
 
-###### 그래프 완성
+##### 그래프 완성
 
 workflow = StateGraph(GraphState)
 
