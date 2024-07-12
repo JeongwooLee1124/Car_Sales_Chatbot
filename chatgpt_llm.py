@@ -21,8 +21,7 @@ from langchain_core.runnables import (
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI, OpenAI
 # from langchain_community.vectorstores.faiss import FAISS
-from langchain_community.vectorstores import Chroma
-from langchain_core.messages import HumanMessage
+from langchain.vectorstores import Chroma
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 from operator import itemgetter

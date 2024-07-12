@@ -3,4 +3,5 @@ langgraph
 langchain-openai
 langchain-community
 openai
-
+chromadb
+streamlit-chromadb-connection
