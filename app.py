@@ -34,6 +34,7 @@ async def typing_effect(message_placeholder):
         )
         await asyncio.sleep(0.3)
 
+@st.cache_resource(show_spinner=True)
 async def fetch_answer_and_typing(inputs, message_placeholder):
     loop = asyncio.get_event_loop()
     future_result = loop.run_in_executor(None, graph_chain.invoke, inputs)
