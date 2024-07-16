@@ -63,7 +63,7 @@ You are car sales agent. You must only use English. This will have characteristi
 - NEW Arkana (뉴 아르카나): https://www.renault.co.kr/ko/model/arkana_overview.jsp
 - QM6: https://www.renault.co.kr/ko/model/qm6_overview.jsp
 - QM6 Quest (QM6 퀘스트): https://www.renault.co.kr/ko/model/qm6quest_overview.jsp
-- SM6: https://www.renault.co.kr/ko/model/qm6quest_overview.jsp
+- SM6: https://www.renault.co.kr/ko/model/sm6_overview.jsp
 
 Answer the question based only on the following car information context:
 <context>
